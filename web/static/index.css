@@ -1,0 +1,80 @@
+center {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content:center;
+	align-items: center;
+	height: 100%;
+}
+p {
+	text-align: center;
+}
+#desc p {
+	text-align: left;
+}
+nav {
+	text-align: center;
+}
+form {
+	text-align: center;
+	display:none;
+}
+td {
+	text-align: center;
+}
+code {
+	background-color: #f0f0f0;
+}
+
+.container {
+	width: 80%; /* Or any desired width */
+	margin: 0 auto; /* Centers the container */
+}
+
+#connect_wallet {
+	display:none;
+}
+#leaderboard_section {
+	display:none;
+}
+
+#center_div div {
+  text-align: center;
+}
+#leaderboard {
+  width: 100%;
+}
+
+.title {
+	padding-top: 16px;
+	padding-bottom: 10px;
+	font-size: 14px;
+	color: gray;
+}
+
+.wallet_address {
+	padding: 10px 20px 10px 20px;
+	word-wrap:break-word;
+	font-size: 14px;
+}
+
+.submit_btn {
+	background: transparent;
+	color: DodgerBlue;
+	font-size: 16px;
+	border: 2px solid DodgerBlue;
+	border-radius: 3px;
+	cursor: pointer;
+	margin-bottom: 10px;
+}
+
+.btn_icon {
+	padding-right: 10px;
+	background-size: contain !important;
+	display: inline-block;
+	height: 20px;
+	width: 20px;
+}
+
+button:focus {
+    outline: none;
+}

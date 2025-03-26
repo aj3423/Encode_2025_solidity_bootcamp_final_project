@@ -1,0 +1,98 @@
+<html>
+	<head>
+
+		<script>window.currPage = '{{currPage}}'</script>
+		<script>window.levelCount = '{{levelCount}}'</script>
+		<script>window.ctfContract = '{{ctfContract}}'</script>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+		<script src="static/wallet.js"></script>
+		<script type="module" src="static/main.js"></script>
+
+		<link rel="stylesheet" href="static/index.css">
+	</head>
+
+	<body><div class="container">
+		<nav>
+			{% for page in pages %}
+			<a href="/?page={{page}}">
+				<button>{{page}}</button>
+			</a>
+			{% endfor %}
+		</nav>
+		<br>
+
+		<div id="desc">
+			{{body | safe}}
+		</div>
+
+		<p>
+			<form id="submit_form">
+				{% for field in fields %}
+					{% if field.type=='textarea' %}
+						<textarea id="field_{{field.id}}" type="text" placeholder="{{field.hint}}"></textarea><br>
+					{% else %}
+						<input id="field_{{field.id}}" type="text" placeholder="{{field.hint}}"><br>
+					{% endif %}
+				{% endfor %}
+			</form>
+		</p>
+		<p>
+			{% if fields|length > 0 %}
+				<button id="submit">Submit</button>
+			{% endif %}
+		</p>
+		<script>
+			$('#submit').on('click', function() {
+				let x = {} 
+				{% for field in fields %}
+					x['{{field.id}}'] = $('#field_{{field.id}}').val()
+				{% endfor %}
+
+				sign_message('{{msgToSign}}', function(wallet, signed) {
+					if (signed) {
+						x["wallet"] = wallet
+						x["signed"] = signed
+
+						$.ajax({
+							url: "/submit?page={{currPage}}", 
+							type: "POST",
+							data: JSON.stringify(x),
+							contentType: "application/json",
+							success: function(response) {
+								alert(response)
+							},
+							error: function(xhr, status, error) {
+								alert("Error: " + error)
+							}
+						})
+					}
+				})
+			})
+		</script>
+
+		<p>
+		<a id="connect_wallet"><button>Connect Wallet</button></a>
+		</p>
+
+		<div id="leaderboard_section">
+			<p>Leaderboard</p>
+			<br>
+			<table class="leaderboard" id="leaderboard">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Score</th>
+						<th>Gas</th>
+						{% if 'lv' in currPage|lower %}
+						<th>Solution</th>
+						{% endif %}
+					</tr>
+				</thead>
+				<tbody>
+				</tbody>
+			</table>
+		</div>
+	</div></body>
+</html>
