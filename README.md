@@ -10,6 +10,9 @@ A slightly improved version of the Encode 2025 solidity CTF.
 - After it ends, the backend will publish the AES_KEY to the contract. The client will use it to decrypt the encrypted source code.
 
 # How to test:
+0. set the environment variables:
+  - $SEPOLIA, it's the RPC url for sepolia testnet.
+  - $PRIV_0, it's the admin private key, the CTF contract should be deployed by this wallet.
 1. go to dir `web`
 2. `uvicorn server:app --reload`
 3. open "http://127.0.0.1:8000/?page=home"
