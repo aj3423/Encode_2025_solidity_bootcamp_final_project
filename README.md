@@ -8,3 +8,10 @@ Improvements:
 How it works:
 - It allows committing the source code along with the solution, the source code will be encrypted using an AES_KEY and stored in the CTF contract.
 - After it ends, the backend will publish the AES_KEY to the contract. The client will use it to decrypt the encrypted source code.
+
+Test:
+1. go to dir `web`
+2. `uvicorn server:app --reload`
+3. open "http://127.0.0.1:8000"
+
+Screenshot:
